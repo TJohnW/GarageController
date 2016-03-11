@@ -11,9 +11,8 @@
 
 class GarageController {
 
-    Garage& garage;
-    InputController& inputController;
-
+    Garage garage;
+    InputController inputController;
 
 public:
 

@@ -4,6 +4,5 @@
 
 #include "GarageController.h"
 
-GarageController::GarageController() {
-    // TO DO
+GarageController::GarageController() : garage{Garage()}, inputController{InputController()}{
 }

@@ -1,8 +1,10 @@
 #include <iostream>
+#include "Garage.h"
 
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
+
+    Garage g = Garage();
     return 0;
 }

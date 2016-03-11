@@ -6,18 +6,17 @@
 #define GARAGECONTROLLER_GARAGE_H
 
 
-#include "State.h"
-#include "ClosingStopped.h"
+#include "Motor.h"
+#include "states/State.h"
 
 class Garage {
 
-
+    State* currentState;
+    //Motor motor;
 
 public:
-    static State& CLOSING_STOPPED;
-    static State& OPENING_STOPPED;
-    static State& OPENING;
-    static State& CLOSING;
+    Garage();
+
 };
 
 

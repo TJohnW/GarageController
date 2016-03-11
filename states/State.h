@@ -8,20 +8,22 @@
 
 #include <iosfwd>
 #include <string>
-#include "Garage.h"
-#include "Event.h"
+#include "../Event.h"
 
+class Garage;
 class State {
 
     std::string name;
 
 public:
-
     State(std::string name);
 
     virtual void onEnter(Garage& garage) = 0;
     virtual void accept(Garage& garage, Event event) = 0;
     virtual void onExit(Garage& garage) = 0;
+
+    std::string getName();
+
 };
 
 

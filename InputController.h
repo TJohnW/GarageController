@@ -6,8 +6,21 @@
 #define GARAGECONTROLLER_INPUTCONTROLLER_H
 
 
-class InputController {
+#include "Garage.h"
+#include "Observer.h"
 
+class InputController : Observer {
+
+    Garage garage;
+
+public:
+    void printState();
+
+    void run();
+
+    void forwardEvent(Event& event);
+
+    void update(Event& event);
 };
 
 
