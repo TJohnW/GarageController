@@ -3,10 +3,9 @@
 //
 
 #include "GarageController.h"
-#include "states/States.h"
 
 GarageController::GarageController() : inputController(garage) {
-    garage.transition(States::OPENING);
-    garage.transition(States::OPENING_STOPPED);
-    garage.getMotor().overcurrent();
+    this->garage.sendEvent(BUTTON_PRESSED);
+    this->garage.sendEvent(OVERCURRENT);
 }
+

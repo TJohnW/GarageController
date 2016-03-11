@@ -9,8 +9,8 @@
 #include <iosfwd>
 #include <string>
 #include "../Event.h"
+#include "../Garage.h"
 
-class Garage;
 class State {
 
     std::string name;

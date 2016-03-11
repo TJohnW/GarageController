@@ -16,6 +16,11 @@ void Garage::transition(State *state) {
     this->currentState->onEnter(*this);
 }
 
+
 Motor& Garage::getMotor() {
     return motor;
+}
+
+void Garage::sendEvent(Event event) {
+    this->currentState->accept(*this, event);
 }

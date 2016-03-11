@@ -17,7 +17,6 @@ class GarageController {
 public:
 
     GarageController();
-
 };
 
 

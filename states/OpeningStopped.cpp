@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "OpeningStopped.h"
+#include "States.h"
 
 
 void OpeningStopped::onEnter(Garage &garage) {
@@ -11,7 +12,13 @@ void OpeningStopped::onEnter(Garage &garage) {
 }
 
 void OpeningStopped::accept(Garage &garage, Event event) {
-
+    switch(event) {
+        case BUTTON_PRESSED:
+            garage.transition(States::CLOSING);
+            break;
+        default:
+            break;
+    }
 }
 
 void OpeningStopped::onExit(Garage &garage) {

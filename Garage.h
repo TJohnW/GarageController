@@ -7,8 +7,7 @@
 
 
 #include "Motor.h"
-#include "states/State.h"
-
+class State;
 class Garage {
 
     State* currentState;
@@ -18,6 +17,8 @@ public:
     Garage();
 
     void transition(State* state);
+
+    void sendEvent(Event event);
 
     Motor& getMotor();
 
