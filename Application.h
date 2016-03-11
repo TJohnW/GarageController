@@ -9,14 +9,14 @@
 #include "Garage.h"
 #include "InputController.h"
 
-class GarageController {
+class Application {
 
     Garage garage;
     InputController inputController;
 
 public:
 
-    GarageController();
+    Application();
 };
 
 

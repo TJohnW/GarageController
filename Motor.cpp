@@ -7,12 +7,27 @@
 
 Motor::Motor() {
     position = 0;
+    enabled = true;
     up = true;
-    run();
+    active = false;
 }
 
 void Motor::run() {
-    overcurrent();
+    while(enabled) {
+        if(active) {
+            if(up && position /* < FULLY_CLOSED_POSITION */) {
+                position++;
+            } else if(position /* > FULLY_OPEN_POSITION */) {
+                position--;
+            }
+
+            if(position == FULLY_CLOSED_POSITION) {
+                fullyClosed();
+            } else if(position == FULLY_OPEN_POSITION) {
+                fullyOpen();
+            }
+        }
+    }
 }
 
 void Motor::overcurrent() {
@@ -25,4 +40,8 @@ void Motor::fullyOpen() {
 
 void Motor::fullyClosed() {
     notifyObservers(FULLY_CLOSED);
+}
+
+void Motor::turnOn() {
+    active = true;
 }

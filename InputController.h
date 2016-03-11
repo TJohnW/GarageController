@@ -11,6 +11,7 @@
 class InputController : public Observer {
 
     Garage& garage;
+    bool enabled;
 
 public:
 
@@ -20,9 +21,15 @@ public:
 
     void run();
 
-    void forwardEvent(Event& event);
+    void forwardEvent(Event event);
 
-    void update(Event& event);
+    void update(Event event);
+
+    void overcurrent();
+
+    void ir_beam();
+
+    void button_pressed();
 };
 
 

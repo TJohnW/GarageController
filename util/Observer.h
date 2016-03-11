@@ -10,7 +10,7 @@
 
 class Observer {
 public:
-    virtual void update(Event& event) = 0;
+    virtual void update(Event event) = 0;
 };
 
 

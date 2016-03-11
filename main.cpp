@@ -1,10 +1,10 @@
 #include <iostream>
-#include "GarageController.h"
+#include "Application.h"
 
 using namespace std;
 
 int main() {
 
-    GarageController garageController = GarageController();
+    Application garageController = Application();
     return 0;
 }

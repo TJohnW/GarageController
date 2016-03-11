@@ -11,9 +11,15 @@
 class Motor : public Subject  {
 
     int position;
+    bool active;
     bool up;
+    bool enabled;
 
 public:
+
+    static const int FULLY_OPEN_POSITION = 10;
+    static const int FULLY_CLOSED_POSITION = 1;
+
     Motor();
 
     void run();
@@ -23,6 +29,8 @@ public:
     void fullyOpen();
 
     void fullyClosed();
+
+    void turnOn();
 };
 
 
