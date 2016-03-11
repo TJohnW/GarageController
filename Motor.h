@@ -6,9 +6,9 @@
 #define GARAGECONTROLLER_MOTOR_H
 
 
-#include "Subject.h"
+#include "util/Subject.h"
 
-class Motor : Subject  {
+class Motor : public Subject  {
 
     int position;
     bool up;
@@ -19,6 +19,10 @@ public:
     void run();
 
     void overcurrent();
+
+    void fullyOpen();
+
+    void fullyClosed();
 };
 
 

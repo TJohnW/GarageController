@@ -7,7 +7,7 @@
 
 
 #include <vector>
-#include "Event.h"
+#include "../Event.h"
 #include "Observer.h"
 
 class Subject {
@@ -16,7 +16,8 @@ class Subject {
 
 public:
     void attach(Observer* observer);
-    void notifyObserver(Event event);
+    void notifyObservers(Event event);
+    void detach(Observer* observer);
 };
 
 

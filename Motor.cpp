@@ -16,5 +16,13 @@ void Motor::run() {
 }
 
 void Motor::overcurrent() {
-    notifyObserver(OVERCURRENT);
+    notifyObservers(OVERCURRENT);
+}
+
+void Motor::fullyOpen() {
+    notifyObservers(FULLY_OPEN);
+}
+
+void Motor::fullyClosed() {
+    notifyObservers(FULLY_CLOSED);
 }

@@ -7,6 +7,10 @@
 
 
 #include "State.h"
+#include "ClosingStopped.h"
+#include "OpeningStopped.h"
+#include "Closing.h"
+#include "Opening.h"
 
 class States {
 public:
@@ -15,6 +19,5 @@ public:
     static State* CLOSING;
     static State* OPENING;
 };
-
 
 #endif //GARAGECONTROLLER_STATES_H

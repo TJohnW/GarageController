@@ -7,13 +7,15 @@
 
 
 #include "Garage.h"
-#include "Observer.h"
 
-class InputController : Observer {
+class InputController : public Observer {
 
-    Garage garage;
+    Garage& garage;
 
 public:
+
+    InputController(Garage& garage);
+
     void printState();
 
     void run();

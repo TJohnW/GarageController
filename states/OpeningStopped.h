@@ -14,9 +14,7 @@ public:
     OpeningStopped(const std::string &name) : State(name) { }
 
     virtual void onEnter(Garage &garage);
-
     virtual void accept(Garage &garage, Event event);
-
     virtual void onExit(Garage &garage);
 };
 

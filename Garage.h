@@ -12,10 +12,14 @@
 class Garage {
 
     State* currentState;
-    //Motor motor;
+    Motor motor;
 
 public:
     Garage();
+
+    void transition(State* state);
+
+    Motor& getMotor();
 
 };
 
