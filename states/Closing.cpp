@@ -8,6 +8,8 @@
 
 void Closing::onEnter(Garage &garage) {
     std::cout << "Entered Closing state.." << "\n";
+    garage.getMotor()->setDirection(false);
+    garage.getMotor()->turnOn();
 }
 
 void Closing::accept(Garage &garage, Event event) {
@@ -27,4 +29,5 @@ void Closing::accept(Garage &garage, Event event) {
 
 void Closing::onExit(Garage &garage) {
     std::cout << "Exiting Closing state.." << "\n";
+    garage.getMotor()->turnOff();
 }

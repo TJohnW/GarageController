@@ -10,16 +10,14 @@
 
 class InputController : public Observer {
 
-    Garage& garage;
+    Garage* garage;
     bool enabled;
 
 public:
 
-    InputController(Garage& garage);
+    InputController(Garage* garage);
 
     void printState();
-
-    void run();
 
     void forwardEvent(Event event);
 
@@ -30,6 +28,9 @@ public:
     void ir_beam();
 
     void button_pressed();
+
+    void run();
+
 };
 
 

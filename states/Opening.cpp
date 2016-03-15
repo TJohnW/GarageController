@@ -8,6 +8,9 @@
 
 void Opening::onEnter(Garage &garage) {
     std::cout << "Entered Opening state.." << "\n";
+    std::cout << "IR Beam on..." << "\n";
+    garage.getMotor()->setDirection(true);
+    garage.getMotor()->turnOn();
 }
 
 void Opening::accept(Garage &garage, Event event) {
@@ -24,4 +27,6 @@ void Opening::accept(Garage &garage, Event event) {
 
 void Opening::onExit(Garage &garage) {
     std::cout << "Exiting Opening state.." << "\n";
+    std::cout << "IR Beam off..." << "\n";
+    garage.getMotor()->turnOff();
 }

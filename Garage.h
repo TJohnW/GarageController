@@ -6,22 +6,33 @@
 #define GARAGECONTROLLER_GARAGE_H
 
 
+#include <queue>
 #include "Motor.h"
 class State;
 class Garage {
 
+    bool enabled;
+
     State* currentState;
     Motor motor;
 
+    std::queue<Event> eventQueue;
+
+    void sendEvent(Event event);
+
 public:
+
+    //static void* run(void *garage);
+
     Garage();
 
     void transition(State* state);
 
-    void sendEvent(Event event);
+    Motor* getMotor();
 
-    Motor& getMotor();
+    void queueEvent(Event event);
 
+    void run();
 };
 
 

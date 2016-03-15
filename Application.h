@@ -10,11 +10,10 @@
 #include "InputController.h"
 
 class Application {
-
-    Garage garage;
-    InputController inputController;
-
 public:
+
+    Garage* garage;
+    InputController* inputController;
 
     Application();
 };

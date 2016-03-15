@@ -31,6 +31,11 @@ public:
     void fullyClosed();
 
     void turnOn();
+
+    void turnOff();
+
+    void setDirection(bool up);
+
 };
 
 
