@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "Garage.h"
-#include "states/States.h"
+#include "States.h"
 
 
 Garage::Garage() : currentState(States::CLOSING_STOPPED) {

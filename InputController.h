@@ -17,8 +17,6 @@ public:
 
     InputController(Garage* garage);
 
-    void printState();
-
     void forwardEvent(Event event);
 
     void update(Event event);

@@ -3,6 +3,8 @@
 //
 
 #include <iostream>
+#include <stdio.h>
+#include <termios.h>
 #include "InputController.h"
 
 InputController::InputController(Garage* garage) : garage(garage) {
@@ -11,10 +13,6 @@ InputController::InputController(Garage* garage) : garage(garage) {
     garage->getMotor()->attach(this);
 }
 
-
-void InputController::printState() {
-
-}
 
 void InputController::forwardEvent(Event event) {
     garage->queueEvent(event);
@@ -38,10 +36,10 @@ void InputController::button_pressed() {
 
 void InputController::run() {
     while(enabled) {
+        char c;
+        std::cin >> c;
 
-        int c = getchar();
-
-        if((char) c == '\n') {
+        if(c == '\n') {
             continue;
         }
 

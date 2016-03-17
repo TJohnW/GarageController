@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <unistd.h>
 #include "Motor.h"
 
 Motor::Motor() {
@@ -21,14 +22,14 @@ void Motor::run() {
                 position--;
             }
 
-            std::cout << "Position: " << position << "\n";
+            // std::cout << "Position: " << position << "\n";
 
             if(position == FULLY_CLOSED_POSITION) {
                 fullyClosed();
-                std::cout << "Garage fully Closed!" << "\n";
+                std::cout << "Garage Reached Closed Position." << "\n";
             } else if(position == FULLY_OPEN_POSITION) {
                 fullyOpen();
-                std::cout << "Garage fully Open!" << "\n";
+                std::cout << "Garage Reached Open Position." << "\n";
             }
             sleep(1);
         }
@@ -49,6 +50,7 @@ void Motor::fullyClosed() {
 
 void Motor::turnOn() {
     active = true;
+    std::cout << "Motor on." << std::endl;
 }
 
 void Motor::setDirection(bool up) {
@@ -57,4 +59,5 @@ void Motor::setDirection(bool up) {
 
 void Motor::turnOff() {
     active = false;
+    std::cout << "Motor off." << std::endl;
 }

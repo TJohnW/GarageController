@@ -6,7 +6,7 @@
 #define GARAGECONTROLLER_MOTOR_H
 
 
-#include "util/Subject.h"
+#include "Subject.h"
 
 class Motor : public Subject  {
 
