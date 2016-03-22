@@ -8,6 +8,8 @@
 
 #include <queue>
 #include "Motor.h"
+#include <pthread.h>
+
 class State;
 class Garage {
 
@@ -18,7 +20,10 @@ class Garage {
 
     std::queue<Event> eventQueue;
 
-    void sendEvent(Event event);
+    void sendEvent();
+
+    pthread_mutexattr_t mutexAttr; //Mutex attribute variable
+    pthread_mutex_t queueMutex; //Mutex for event queue
 
 public:
 

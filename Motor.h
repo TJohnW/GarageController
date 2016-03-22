@@ -7,6 +7,7 @@
 
 
 #include "Subject.h"
+#include <pthread.h>
 
 class Motor : public Subject  {
 
@@ -14,6 +15,10 @@ class Motor : public Subject  {
     bool active;
     bool up;
     bool enabled;
+
+    pthread_mutexattr_t mutexAttr; //Mutex attribute variable
+    pthread_mutex_t dirMutex; //Mutex for direction variable
+    pthread_mutex_t pwrMutex; //Mutex for power variable
 
 public:
 
@@ -35,6 +40,10 @@ public:
     void turnOff();
 
     void setDirection(bool up);
+
+    bool isOn();
+
+    bool isUp();
 
 };
 
