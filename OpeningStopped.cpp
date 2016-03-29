@@ -5,10 +5,11 @@
 #include <iostream>
 #include "OpeningStopped.h"
 #include "States.h"
+#include "SafeOutput.h"
 
 
 void OpeningStopped::onEnter(Garage &garage) {
-    std::cout << "State: OpeningStopped" << std::endl;
+    SafeOutput::safe_output("State: OpeningStopped");
 }
 
 void OpeningStopped::accept(Garage &garage, Event event) {

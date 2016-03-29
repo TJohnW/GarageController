@@ -6,6 +6,7 @@
 #include "Garage.h"
 #include "States.h"
 #include <pthread.h>
+#include "SafeOutput.h"
 
 
 Garage::Garage() : currentState(States::CLOSING_STOPPED) {
@@ -28,35 +29,23 @@ Motor* Garage::getMotor() {
 
 void Garage::queueEvent(Event event) {
     //Get mutex
-    int result = pthread_mutex_trylock(&queueMutex);
-    while (result != 0) {
-        result = pthread_mutex_trylock(&queueMutex);
-    }
+    SafeOutput::lock(&queueMutex);
     //Add event
     this->eventQueue.push(event);
     //Release mutex
-    result = pthread_mutex_unlock(&queueMutex);
-    while (result != 0) {
-        result = pthread_mutex_unlock(&queueMutex);
-    }
+    SafeOutput::unlock(&queueMutex);
 }
 
 void Garage::sendEvent() {
     //Get mutex
-    int result = pthread_mutex_trylock(&queueMutex);
-    while (result != 0) {
-        result = pthread_mutex_trylock(&queueMutex);
-    }
+    SafeOutput::lock(&queueMutex);
     //Send event if one exists
     if(this->eventQueue.size() > 0) {
         this->currentState->accept(*this, this->eventQueue.front());
         this->eventQueue.pop();
     }
     //Release mutex
-    result = pthread_mutex_unlock(&queueMutex);
-    while (result != 0) {
-        result = pthread_mutex_unlock(&queueMutex);
-    }
+    SafeOutput::unlock(&queueMutex);
 }
 
 

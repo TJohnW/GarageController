@@ -5,9 +5,10 @@
 #include <iostream>
 #include "Opening.h"
 #include "States.h"
+#include "SafeOutput.h"
 
 void Opening::onEnter(Garage &garage) {
-    std::cout << "State: Opening" << std::endl;
+    SafeOutput::safe_output("State: Opening");
     garage.getMotor()->setDirection(true);
     garage.getMotor()->turnOn();
 }

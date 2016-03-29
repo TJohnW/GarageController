@@ -5,12 +5,13 @@
 #include <iostream>
 #include "Closing.h"
 #include "States.h"
+#include "SafeOutput.h"
 
 void Closing::onEnter(Garage &garage) {
-    std::cout << "State: Closing" << std::endl;
+    SafeOutput::safe_output("State: Closing");
     garage.getMotor()->setDirection(false);
     garage.getMotor()->turnOn();
-    std::cout << "IR Beam on." << std::endl;
+    SafeOutput::safe_output("IR Beam on.");
 }
 
 void Closing::accept(Garage &garage, Event event) {
@@ -30,5 +31,5 @@ void Closing::accept(Garage &garage, Event event) {
 
 void Closing::onExit(Garage &garage) {
     garage.getMotor()->turnOff();
-    std::cout << "IR Beam off." << std::endl;
+    SafeOutput::safe_output("IR Beam off.");
 }

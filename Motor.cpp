@@ -4,8 +4,9 @@
 
 #include <iostream>
 #include <unistd.h>
-#include "Motor.h"
 #include <pthread.h>
+#include "Motor.h"
+#include "SafeOutput.h"
 
 Motor::Motor() {
     position = 1;
@@ -32,10 +33,10 @@ void Motor::run() {
 
             if(position == FULLY_CLOSED_POSITION) {
                 fullyClosed();
-                std::cout << "Garage Reached Closed Position." << "\n";
+                SafeOutput::safe_output("Garage Reached Closed Position.");
             } else if(position == FULLY_OPEN_POSITION) {
                 fullyOpen();
-                std::cout << "Garage Reached Open Position." << "\n";
+                SafeOutput::safe_output("Garage Reached Open Position.");
             }
             sleep(1);
         }
@@ -55,70 +56,30 @@ void Motor::fullyClosed() {
 }
 
 void Motor::turnOn() {
-    int result = pthread_mutex_trylock(&pwrMutex);
-    while (result != 0) {
-        result = pthread_mutex_trylock(&pwrMutex);
-    }
+    SafeOutput::lock(&pwrMutex);
     active = true;
-    std::cout << "Motor on." << std::endl;
+    SafeOutput::safe_output("Motor on.");
     //Release mutex
-    result = pthread_mutex_unlock(&pwrMutex);
-    while (result != 0) {
-        result = pthread_mutex_unlock(&pwrMutex);
-    }
+    SafeOutput::unlock(&pwrMutex);
 }
 
 void Motor::setDirection(bool up) {
-    int result = pthread_mutex_trylock(&dirMutex);
-    while (result != 0) {
-        result = pthread_mutex_trylock(&dirMutex);
-    }
+    SafeOutput::lock(&dirMutex);
     this->up = up;
-    result = pthread_mutex_unlock(&dirMutex);
-    while (result != 0) {
-        result = pthread_mutex_unlock(&dirMutex);
-    }
+    SafeOutput::unlock(&dirMutex);
 }
 
 void Motor::turnOff() {
-    int result = pthread_mutex_trylock(&pwrMutex);
-    while (result != 0) {
-        result = pthread_mutex_trylock(&pwrMutex);
-    }
+    SafeOutput::lock(&pwrMutex);
     active = false;
-    std::cout << "Motor off." << std::endl;
-    //Release mutex
-    result = pthread_mutex_unlock(&pwrMutex);
-    while (result != 0) {
-        result = pthread_mutex_unlock(&pwrMutex);
-    }
+    SafeOutput::safe_output("Motor off.");
+    SafeOutput::unlock(&pwrMutex);
 }
 
 bool Motor::isOn() {
-    bool retval;
-    int result = pthread_mutex_trylock(&pwrMutex);
-    while (result != 0) {
-        result = pthread_mutex_trylock(&pwrMutex);
-    }
-    retval = active;
-    //Release mutex
-    result = pthread_mutex_unlock(&pwrMutex);
-    while (result != 0) {
-        result = pthread_mutex_unlock(&pwrMutex);
-    }
-    return retval;
+    return active; // this is an atomic operation, no need for a mutex
 }
 
 bool Motor::isUp() {
-    bool retval;
-    int result = pthread_mutex_trylock(&dirMutex);
-    while (result != 0) {
-        result = pthread_mutex_trylock(&dirMutex);
-    }
-    retval = up;
-    result = pthread_mutex_unlock(&dirMutex);
-    while (result != 0) {
-        result = pthread_mutex_unlock(&dirMutex);
-    }
-    return retval;
+    return up; // same here
 }

@@ -6,10 +6,11 @@
 #include <stdio.h>
 #include <termios.h>
 #include "InputController.h"
+#include "SafeOutput.h"
 
 InputController::InputController(Garage* garage) : garage(garage) {
     enabled = true;
-    std::cout << "Initializing InputController" << "\n";
+    SafeOutput::safe_output("Initializing InputController");
     garage->getMotor()->attach(this);
 }
 
@@ -43,7 +44,7 @@ void InputController::run() {
             continue;
         }
 
-        std::cout << (char) c << " received. \n";
+        SafeOutput::safe_output(std::string(1, (char) c) + " received.");
         switch((char) c) {
             case 'm':
                 this->overcurrent();

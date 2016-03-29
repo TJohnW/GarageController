@@ -1,8 +1,10 @@
 #include <iostream>
 #include <pthread.h>
 #include "Application.h"
+#include "SafeOutput.h"
 
 using namespace std;
+
 
 void *startGarage(void* garage) {
     ((Garage*) garage)->run();
@@ -17,6 +19,9 @@ void *startMotor(void* motor) {
 }
 
 int main(int argc, char *argv[]) {
+	SafeOutput out;
+	SafeOutput::init();
+
 	Application garageController;
 	//pthread_t inputThread;
 	pthread_t garageThread;
