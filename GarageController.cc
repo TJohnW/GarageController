@@ -1,7 +1,7 @@
 #include <iostream>
 #include <pthread.h>
 
-//#include <sys/neutrino.h>
+#include <sys/neutrino.h>
 
 #include "Application.h"
 #include "SafeOutput.h"
@@ -11,18 +11,18 @@ using namespace std;
 
 
 void *startGarage(void* garage) {
-    ((Garage*) garage)->run();
+	((Garage*) garage)->run();
 }
 
 void *startInputController(void* inputController) {
-    ((InputController*) inputController)->run();
+	((InputController*) inputController)->run();
 }
 
 void *startMotor(void* motor) {
-    ((Motor*) motor)->run();
+	((Motor*) motor)->run();
 }
 
-/*
+
 void verifyThreadAccess() {
 	if ( ThreadCtl(_NTO_TCTL_IO, NULL) == -1)
 	{
@@ -30,11 +30,11 @@ void verifyThreadAccess() {
 		exit(1);
 	}
 }
-*/
+
 
 int main(int argc, char *argv[]) {
 
-	// verifyThreadAccess();
+	verifyThreadAccess();
 
 	IOPort ioPort = IOPort();
 	return -1;
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
 	SafeOutput out;
 	SafeOutput::init();
 
-	Application garageController;
+	Application garageController(true);
 	//pthread_t inputThread;
 	pthread_t garageThread;
 	pthread_t motorThread;

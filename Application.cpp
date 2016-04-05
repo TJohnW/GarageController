@@ -6,7 +6,9 @@
 #include <iostream>
 #include "Application.h"
 
-Application::Application() {
+bool Application::SIMULATION = false;
+Application::Application(bool simulation) {
+    SIMULATION = simulation;
     garage = new Garage();
     inputController = new InputController(garage);
 }

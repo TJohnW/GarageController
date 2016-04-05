@@ -5,6 +5,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <pthread.h>
+#include "Application.h"
 #include "Motor.h"
 #include "SafeOutput.h"
 
@@ -23,27 +24,29 @@ Motor::Motor() {
 void Motor::run() {
     while(enabled) {
         if(isOn()) {
-            if()
-            /*
-            if(isUp() ) {
-                position++;
+            if(Application::SIMULATION) {
+                if(isUp() ) {
+                    position++;
+                } else {
+                    position--;
+                }
+
+                // std::cout << "Position: " << position << "\n";
+
+                if(position == FULLY_CLOSED_POSITION) {
+                    fullyClosed();
+                    SafeOutput::safe_output("Garage Reached Closed Position.");
+                } else if(position == FULLY_OPEN_POSITION) {
+                    fullyOpen();
+                    SafeOutput::safe_output("Garage Reached Open Position.");
+                }
+                sleep(1);
             } else {
-                position--;
+                // if FULLY_OPEN or FULLY_CLOSED received, do something...
+
+
             }
 
-            // std::cout << "Position: " << position << "\n";
-
-            if(position == FULLY_CLOSED_POSITION) {
-                fullyClosed();
-                SafeOutput::safe_output("Garage Reached Closed Position.");
-            } else if(position == FULLY_OPEN_POSITION) {
-                fullyOpen();
-                SafeOutput::safe_output("Garage Reached Open Position.");
-            }
-            sleep(1);
-             */
-
-            // this part of the project we just wait to receive an input telling us that the door is full open or closed
         }
     }
 }

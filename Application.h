@@ -12,10 +12,12 @@
 class Application {
 public:
 
+    static bool SIMULATION;
+
     Garage* garage;
     InputController* inputController;
 
-    Application();
+    Application(bool simulation);
 };
 
 
