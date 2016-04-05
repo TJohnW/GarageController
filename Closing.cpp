@@ -6,12 +6,14 @@
 #include "Closing.h"
 #include "States.h"
 #include "SafeOutput.h"
+#include "IOPort.h"
 
 void Closing::onEnter(Garage &garage) {
     SafeOutput::safe_output("State: Closing");
     garage.getMotor()->setDirection(false);
     garage.getMotor()->turnOn();
     SafeOutput::safe_output("IR Beam on.");
+    IOPort::IR_ON();
 }
 
 void Closing::accept(Garage &garage, Event event) {
@@ -32,4 +34,5 @@ void Closing::accept(Garage &garage, Event event) {
 void Closing::onExit(Garage &garage) {
     garage.getMotor()->turnOff();
     SafeOutput::safe_output("IR Beam off.");
+    IOPort::IR_OFF();
 }

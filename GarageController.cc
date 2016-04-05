@@ -14,10 +14,6 @@ void *startGarage(void* garage) {
 	((Garage*) garage)->run();
 }
 
-void *startInputController(void* inputController) {
-	((InputController*) inputController)->run();
-}
-
 void *startMotor(void* motor) {
 	((Motor*) motor)->run();
 }
@@ -33,20 +29,27 @@ void verifyThreadAccess() {
 
 
 int main(int argc, char *argv[]) {
+	bool sim = false;
+	if(argc > 0) {
+		if(argv[0] == "s") {
+			sim = true;
+		}
+	}
 
-	verifyThreadAccess();
+	if(!sim) {
+		verifyThreadAccess();
+	}
 
 	IOPort ioPort = IOPort();
-	return -1;
 
 	SafeOutput out;
 	SafeOutput::init();
 
-	Application garageController(true);
-	//pthread_t inputThread;
+	Application garageController(sim);
+
 	pthread_t garageThread;
 	pthread_t motorThread;
-	//pthread_create(&inputThread, NULL, startInputController, (void *) garageController.inputController);
+
 	pthread_create(&garageThread, NULL, startGarage, (void*) garageController.garage);
 	pthread_create(&motorThread, NULL, startMotor, (void*) garageController.garage->getMotor());
 

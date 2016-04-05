@@ -8,6 +8,7 @@
 #include "Application.h"
 #include "Motor.h"
 #include "SafeOutput.h"
+#include "IOPort.h"
 
 Motor::Motor() {
     position = 1;
@@ -43,8 +44,11 @@ void Motor::run() {
                 sleep(1);
             } else {
                 // if FULLY_OPEN or FULLY_CLOSED received, do something...
-
-
+                if(IOPort::IS_FULL_CLOSE()) {
+                    fullyClosed();
+                } else if(IOPort::IS_FULL_OPEN()) {
+                    fullyOpen();
+                }
             }
 
         }
@@ -69,6 +73,11 @@ void Motor::turnOn() {
     SafeOutput::safe_output("Motor on.");
     //Release mutex
     SafeOutput::unlock(&pwrMutex);
+    if(up) {
+        IOPort::MOTOR_UP_ON();
+    } else {
+        IOPort::MOTOR_DOWN_ON();
+    }
 }
 
 void Motor::setDirection(bool up) {
@@ -82,6 +91,11 @@ void Motor::turnOff() {
     active = false;
     SafeOutput::safe_output("Motor off.");
     SafeOutput::unlock(&pwrMutex);
+    if(up) {
+        IOPort::MOTOR_UP_OFF();
+    } else {
+        IOPort::MOTOR_DOWN_OFF();
+    }
 }
 
 bool Motor::isOn() {
