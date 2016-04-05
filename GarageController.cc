@@ -1,7 +1,11 @@
 #include <iostream>
 #include <pthread.h>
+
+//#include <sys/neutrino.h>
+
 #include "Application.h"
 #include "SafeOutput.h"
+#include "IOPort.h"
 
 using namespace std;
 
@@ -18,7 +22,23 @@ void *startMotor(void* motor) {
     ((Motor*) motor)->run();
 }
 
+/*
+void verifyThreadAccess() {
+	if ( ThreadCtl(_NTO_TCTL_IO, NULL) == -1)
+	{
+		perror("Failed to get I/O access permission");
+		exit(1);
+	}
+}
+*/
+
 int main(int argc, char *argv[]) {
+
+	// verifyThreadAccess();
+
+	IOPort ioPort = IOPort();
+	return -1;
+
 	SafeOutput out;
 	SafeOutput::init();
 

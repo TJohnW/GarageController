@@ -23,9 +23,11 @@ Motor::Motor() {
 void Motor::run() {
     while(enabled) {
         if(isOn()) {
-            if(isUp() /* && position  < FULLY_CLOSED_POSITION */) {
+            if()
+            /*
+            if(isUp() ) {
                 position++;
-            } else /* if(position > FULLY_OPEN_POSITION )*/ {
+            } else {
                 position--;
             }
 
@@ -39,6 +41,9 @@ void Motor::run() {
                 SafeOutput::safe_output("Garage Reached Open Position.");
             }
             sleep(1);
+             */
+
+            // this part of the project we just wait to receive an input telling us that the door is full open or closed
         }
     }
 }
