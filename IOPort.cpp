@@ -47,8 +47,8 @@ IOPort::IOPort() {
     setBit(CONTROL_HANDLE, 1, 0);
     setBit(CONTROL_HANDLE, 4, 1);
 
-    setBit(B_HANDLE, 3, 1);
-    sleep(1);
+    //setBit(B_HANDLE, 3, 1);
+    //sleep(1);
     //setBit(B_HANDLE, 3, 0);
 
     while(true) {
@@ -69,8 +69,8 @@ bool IOPort::isSetBit(uintptr_t& port, int bit) {
 void IOPort::setBit(uintptr_t& port, int bit, bool value) {
     uint8_t readValue = in8(port);
     std::bitset<8> set(readValue);
-    set.set(bit, value);
-    readValue = set.to_ulong();
+    set.set((size_t) bit, value);
+    readValue = (uint8_t) set.to_ulong();
     out8(port, readValue);
 }
 
